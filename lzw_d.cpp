@@ -32,7 +32,6 @@ private:
 
 
 
-//Try with pairs of character codes as bitfields
 
 struct code_pair {
 	uint16_t a;
