@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
-
+#include <chrono>
 using namespace std;
 
 struct dictionary {
@@ -51,8 +51,8 @@ struct code_pair {
 
 
 struct codestring {
-	//Should be a reasonably nice way to store the file on the heap? For larger files you'd
-	//want to do the decoding without reading the whole file into ram at once but this will
+	//Should be a reasonably nice way to store the file on the heap? Think for larger files you'd
+	//probably want to do the decoding without reading the whole file into ram at once but this will
 	//probs suffice for a few kb
 
 	unsigned int len;
@@ -131,6 +131,8 @@ int main()
 	cout<<"File to write: ";
 	cin>>useroutput;
 
+
+	auto start = chrono::high_resolution_clock::now();
 	cout << "Importing..\n";
 	codestring file(userinput);
 	cout << "Loaded, working..\n";
@@ -165,7 +167,10 @@ int main()
 	}
 	outfile << d.entries[prev];
 
-	cout << "Done" << endl;
+	auto stop = chrono::high_resolution_clock::now();
+	auto duration = chrono::duration_cast<chrono::microseconds>(stop - start);
+	cout << "Done. Took "<<duration.count()/1000<< " milliseconds total." << endl;
+
 
 	cin.ignore();
 }
