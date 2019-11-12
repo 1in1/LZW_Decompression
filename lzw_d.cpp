@@ -6,34 +6,30 @@ using namespace std;
 
 struct dictionary {
 	string* entries = new string [4096];
-	void initialize();
-	void add(string);
+	dictionary() { initialize(); }
+	void initialize() {
+		base_pointer = 256;
+		for (uint16_t c = 0; c < 256; c++)
+			entries[c] = char(c);
+		for (uint16_t i = 256; i < 4096; i++)
+			entries[i] = "";
+	}
+	void add(string x) {
+		if (base_pointer < 4096)
+		{
+			entries[base_pointer] = x;
+			base_pointer++;
+		}
+		else
+		{
+			initialize();
+			add(x);
+		}
+	}
 private:
 	uint16_t base_pointer;
 };
 
-void dictionary::initialize()
-{
-	base_pointer = 256;
-	for (uint16_t c = 0; c < 256; c++)
-		entries[c] = char(c);
-	for (uint16_t i = 256; i < 4096; i++)
-		entries[i] = "";
-}
-
-void dictionary::add(string x)
-{
-	if (base_pointer < 4096)
-	{
-		entries[base_pointer] = x;
-		base_pointer++;
-	}
-	else
-	{
-		initialize();
-		add(x);
-	}
-}
 
 
 //Try with pairs of character codes as bitfields
