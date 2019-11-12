@@ -3,4 +3,4 @@ Decompression algorithm for the LZW scheme, written over a couple of days over t
 
 It runs against the compressed text files expectedly fast (~128 milliseconds for the largest, 917KB uncompressed), but is dissapointingly slow against the larger video file in the test case (~31.258 seconds, 3.4GB uncompressed). I'm well aware it is RAM hungry, and I do have ideas for optimisation (particularly the dictionary/output) but ran out of time before implementing. 
 
-Runtimes are those given by the std::chrono library, compiled with MSVC with the O2 option, and ran on a CPU @ 2.4GHz
+Runtimes are those given by the std::chrono library, compiled with MSVC with the O2 option, and ran on a CPU @ 2.4GHz.
